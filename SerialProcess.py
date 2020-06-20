@@ -62,6 +62,11 @@ class SerialProcess(multiprocessing.Process):
                     topic_out = "%s/%s/READ/%s" % (family, deviceId, key)
                 self.logger.debug('set topic to: %s' % (topic_out))
 
+                # Added to correct Watts output
+                if family == "Oregon CM180" and key == "WATT":
+                    self.logger.debug('This device is in the Oregon CM180 family so correcting Watts value (x10)')
+                    val = val * 10
+
                 data_out = {
                     'method': 'publish',
                     'topic': topic_out,

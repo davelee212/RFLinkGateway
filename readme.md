@@ -3,6 +3,16 @@
 ## Purpose
 Bridge between RFLink Gateway and MQTT broker.
 
+## Changes from original repository
+
+Added a small check at lines 66-68 to multiply by 10 the WATTS input from Oregon CM180 devices as this is reported incorrectly from the RFLink device
+
+```python
+if family == "Oregon CM180" and key == "WATT":
+  self.logger.debug('This device is in the Oregon CM180 family so correcting Watts value (x10)')
+  val = val * 10
+```
+
 ## Current features
 Forwarding messages received on TTY port from RFLink Gateway Arduino board
 to MQTT broker in both directions.
